@@ -144,8 +144,8 @@ ORDER BY 1;
 /*
 5.I’d like to tell the story of our website performance improvements over the course of the first 8 months. 
  Could you pull session to order conversion rates, by month?
- 
  */
+ 
  SELECT 
     LEFT(website_sessions.created_at, 7) AS yearmonth,
     COUNT(DISTINCT website_sessions.website_session_id) AS sessions,
@@ -262,8 +262,8 @@ group by 1;
 7.I’d love for you to quantify the impact of our billing test, as well. Please analyze the lift generated from the test 
 (Sep 10 – Nov 10), in terms of revenue per billing page session, and then pull the number of billing page sessions 
 for the past month to understand monthly impact.
-
 */
+
 select
 billing_version_seen,
 count(distinct website_session_id)as sessions,
