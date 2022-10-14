@@ -9,6 +9,7 @@ OBJECTIVES:
 1.Gsearch seems to be the biggest driver of our business. Could you pull monthly trends for gsearch sessions 
 and orders so that we can showcase the growth there?   
 */
+
 SELECT 
     left(website_sessions.created_at, 7) AS yearmonth,
     COUNT(DISTINCT website_sessions.website_session_id) AS sessions,
@@ -28,6 +29,7 @@ ORDER BY 1;
 2. Next, it would be great to see a similar monthly trend for Gsearch, but this time splitting out nonbrand and 
 brand campaigns separately. I am wondering if brand is picking up at all. If so, this is a good story to tell. 
 */
+
 SELECT 
     LEFT(website_sessions.created_at, 7) AS yearmonth,
     COUNT(DISTINCT CASE
@@ -60,6 +62,7 @@ ORDER BY 1;
 3.While we’re on Gsearch, could you dive into nonbrand, and pull monthly sessions and orders split by device 3 type?
  I want to flex our analytical muscles a little and show the board we really know our traffic sources.
  */
+ 
 SELECT 
     LEFT(website_sessions.created_at, 7) AS yearmonth,
        COUNT(DISTINCT CASE
@@ -93,6 +96,7 @@ ORDER BY 1;
 4.I’m worried that one of our more pessimistic board members may be concerned about the large % of traffic from 4 Gsearch. 
 Can you pull monthly trends for Gsearch, alongside monthly trends for each of our other channels?
 */
+
 # first, find the various utm sources and refers to see the traffic we are getting
 
 SELECT distinct utm_source,
@@ -140,6 +144,7 @@ ORDER BY 1;
 /*
 5.I’d like to tell the story of our website performance improvements over the course of the first 8 months. 
  Could you pull session to order conversion rates, by month?
+ 
  */
  SELECT 
     LEFT(website_sessions.created_at, 7) AS yearmonth,
@@ -159,6 +164,7 @@ ORDER BY 1;
 6.For the landing page test you analyzed previously, it would be great to show a full conversion funnel from each 
 of the two pages to orders. You can use the same time period you analyzed last time (Jun 19 – Jul 28).
 */
+
 #identify each pageview as specific funnel step
 create temporary table session_level_made_it_flags5
 select
@@ -256,6 +262,7 @@ group by 1;
 7.I’d love for you to quantify the impact of our billing test, as well. Please analyze the lift generated from the test 
 (Sep 10 – Nov 10), in terms of revenue per billing page session, and then pull the number of billing page sessions 
 for the past month to understand monthly impact.
+
 */
 select
 billing_version_seen,
@@ -276,9 +283,10 @@ and website_pageviews.pageview_url in ('/billing','/billing-2')
 )as billing_pageviews_and_order
 group by 
 billing_version_seen;
-# $22.83 revenue per billing page seen for the old version
-# $31.34 revenue per billing page seen for the new version
-# lift:$8.51
+-- $22.83 revenue per billing page seen for the old version
+-- $31.34 revenue per billing page seen for the new version
+-- lift:$8.51
+
 # final output
 select 
 count(website_session_id)as billing_sessions_last_month
@@ -287,5 +295,6 @@ where website_pageviews.created_at >'2012-10-27'
 and website_pageviews.created_at < '2012-11-27'
 and website_pageviews.pageview_url in ('/billing','/billing-2')
 
-#1193 billing sessions last month,lift$8.51 per session--value of billing test $ 10152 for the last month
+--1193 billing sessions last month,lift$8.51 per session
+--value of billing test $ 10152 for the last month
 
