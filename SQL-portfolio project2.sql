@@ -1,6 +1,13 @@
+OBJECTIVES:
+• Tell the story of the company’s growth, using trended performance data
+• Use the database to explain some of the details around your growth story, and quantify the revenue impact of some of your wins
+• Analyze current performance, and use that data available to assess upcoming opportunities
+
+-- 7 questions from the manager as below
+
 /*
 1.Gsearch seems to be the biggest driver of our business. Could you pull monthly trends for gsearch sessions 
-and orders so that we can showcase the growth there? 
+and orders so that we can showcase the growth there?   
 */
 SELECT 
     left(website_sessions.created_at, 7) AS yearmonth,
